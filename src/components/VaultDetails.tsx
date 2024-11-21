@@ -198,107 +198,129 @@ export default function VaultDetails({ vaultId }: { vaultId: string | null }) {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">
-        Vault Details for {vaultId}
-      </h2>
-      <p className="text-gray-600">
-        Total Assets in Vault: {totalAssets} tokens
-      </p>
-      <p className="text-gray-600">Owner: {owner}</p>
-      <p className="text-gray-600">Your Address: {userAddress}</p>
-      <p className="text-gray-600">
-        Your Balance with Profit: {userBalanceWithProfit} tokens
-      </p>
+    <div className="p-6 bg-gradient-to-r from-gray-900 via-black to-gray-800 text-white rounded-lg shadow-xl">
+      <h2 className="text-3xl font-bold mb-6">Vault Details</h2>
 
-      {error && <div className="text-red-500">{error}</div>}
+      <div className="space-y-4 mb-6">
+        <p>
+          <span className="font-semibold">Vault ID:</span> {vaultId}
+        </p>
+        <p>
+          <span className="font-semibold">Total Assets:</span> {totalAssets}{" "}
+          tokens
+        </p>
+        <p>
+          <span className="font-semibold">Owner:</span> {owner || "Loading..."}
+        </p>
+        <p>
+          <span className="font-semibold">Your Address:</span>{" "}
+          {userAddress || "Loading..."}
+        </p>
+        <p>
+          <span className="font-semibold">Your Balance with Profit:</span>{" "}
+          {userBalanceWithProfit} tokens
+        </p>
+      </div>
 
-      <div className="mt-4 space-y-4">
-        {/* Deposit */}
+      {error && (
+        <div className="text-red-500 bg-red-900 bg-opacity-20 p-2 rounded mb-4">
+          {error}
+        </div>
+      )}
+
+      <div className="space-y-6">
+        {/* Deposit Section */}
         <div>
+          <h3 className="text-xl font-bold mb-2">Deposit</h3>
           <input
-            type="text"
+            type="number"
+            placeholder="Enter deposit amount"
             value={depositAmount}
             onChange={(e) => setDepositAmount(e.target.value)}
-            placeholder="Amount to Deposit"
-            className="p-2 border rounded w-full mb-2"
+            className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-blue-500"
           />
           <button
             onClick={handleDeposit}
             disabled={loading.deposit}
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className="w-full mt-3 bg-blue-600 hover:bg-blue-500 text-white py-2 px-4 rounded-md transition"
           >
             {loading.deposit ? "Processing..." : "Deposit"}
           </button>
         </div>
 
-        {/* Withdraw */}
+        {/* Withdraw Section */}
         <div>
+          <h3 className="text-xl font-bold mb-2">Withdraw</h3>
           <input
-            type="text"
+            type="number"
+            placeholder="Enter withdraw amount"
             value={withdrawAmount}
             onChange={(e) => setWithdrawAmount(e.target.value)}
-            placeholder="Amount to Withdraw"
-            className="p-2 border rounded w-full mb-2"
+            className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-red-500"
           />
           <button
             onClick={handleWithdraw}
             disabled={loading.withdraw}
-            className="bg-red-500 text-white py-2 px-4 rounded"
+            className="w-full mt-3 bg-red-600 hover:bg-red-500 text-white py-2 px-4 rounded-md transition"
           >
             {loading.withdraw ? "Processing..." : "Withdraw"}
           </button>
         </div>
 
-        {/* Add Strategy (Owner only) */}
+        {/* Add Strategy Section (Owner Only) */}
         {isOwner && (
           <div>
+            <h3 className="text-xl font-bold mb-2">Add Strategy</h3>
             <input
               type="text"
+              placeholder="Enter strategy contract address"
               value={addStrategyAddress}
               onChange={(e) => setAddStrategyAddress(e.target.value)}
-              placeholder="Strategy Contract Address to Add"
-              className="p-2 border rounded w-full mb-2"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-green-500"
             />
             <button
               onClick={handleAddStrategy}
               disabled={loading.addStrategy}
-              className="bg-green-500 text-white py-2 px-4 rounded"
+              className="w-full mt-3 bg-green-600 hover:bg-green-500 text-white py-2 px-4 rounded-md transition"
             >
               {loading.addStrategy ? "Processing..." : "Add Strategy"}
             </button>
           </div>
         )}
 
-        {/* Remove Strategy (Owner only) */}
+        {/* Remove Strategy Section (Owner Only) */}
         {isOwner && (
           <div>
+            <h3 className="text-xl font-bold mb-2">Remove Strategy</h3>
             <input
               type="text"
+              placeholder="Enter strategy contract address"
               value={removeStrategyAddress}
               onChange={(e) => setRemoveStrategyAddress(e.target.value)}
-              placeholder="Strategy Contract Address to Remove"
-              className="p-2 border rounded w-full mb-2"
+              className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-yellow-500"
             />
             <button
               onClick={handleRemoveStrategy}
               disabled={loading.removeStrategy}
-              className="bg-yellow-500 text-white py-2 px-4 rounded"
+              className="w-full mt-3 bg-yellow-600 hover:bg-yellow-500 text-white py-2 px-4 rounded-md transition"
             >
               {loading.removeStrategy ? "Processing..." : "Remove Strategy"}
             </button>
           </div>
         )}
 
-        {/* Harvest (Owner only) */}
+        {/* Harvest Section (Owner Only) */}
         {isOwner && (
-          <button
-            onClick={handleHarvest}
-            disabled={loading.harvest}
-            className="bg-purple-500 text-white py-2 px-4 rounded"
-          >
-            {loading.harvest ? "Processing..." : "Harvest Rewards"}
-          </button>
+          <div>
+            <h3 className="text-xl font-bold mb-2">Harvest Rewards</h3>
+            <button
+              onClick={handleHarvest}
+              disabled={loading.harvest}
+              className="w-full bg-purple-600 hover:bg-purple-500 text-white py-2 px-4 rounded-md transition"
+            >
+              {loading.harvest ? "Processing..." : "Harvest"}
+            </button>
+          </div>
         )}
       </div>
     </div>

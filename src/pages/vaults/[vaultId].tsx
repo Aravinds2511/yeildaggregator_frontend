@@ -6,7 +6,7 @@ export default function VaultDetailPage() {
   const { vaultId } = router.query;
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-900 p-6">
       <VaultDetails vaultId={vaultId as string} />
     </div>
   );

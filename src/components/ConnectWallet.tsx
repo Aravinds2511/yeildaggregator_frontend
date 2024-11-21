@@ -45,7 +45,7 @@ export default function ConnectWallet() {
     <div className="p-4">
       {address ? (
         <div className="flex items-center space-x-2">
-          <span className="text-green-600 font-semibold">Connected:</span>
+          <span className="text-green-600 font-semibold">Connected</span>
           <span className="text-gray-800">
             {/* {address.slice(0, 6)}...{address.toString().slice(-4)} */}
           </span>

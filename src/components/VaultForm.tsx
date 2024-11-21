@@ -21,35 +21,37 @@ export default function VaultForm() {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-4 bg-white shadow-md rounded-md max-w-md mx-auto"
-    >
-      <h2 className="text-xl font-semibold mb-4">Create New Vault</h2>
-      <input
-        className="w-full mb-3 p-2 border border-gray-300 rounded-md"
-        placeholder="Asset Address"
-        value={asset}
-        onChange={(e) => setAsset(e.target.value)}
-      />
-      <input
-        className="w-full mb-3 p-2 border border-gray-300 rounded-md"
-        placeholder="Vault Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        className="w-full mb-3 p-2 border border-gray-300 rounded-md"
-        placeholder="Symbol"
-        value={symbol}
-        onChange={(e) => setSymbol(e.target.value)}
-      />
-      <button
-        type="submit"
-        className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-      >
-        Create Vault
-      </button>
-    </form>
+    <div className="p-6 bg-gradient-to-r from-purple-900 via-black to-purple-800 text-white rounded-lg shadow-xl max-w-lg mx-auto">
+      <h2 className="text-3xl font-bold mb-4 text-center">Create New Vault</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          type="text"
+          placeholder="Asset Address"
+          value={asset}
+          onChange={(e) => setAsset(e.target.value)}
+          className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-purple-500"
+        />
+        <input
+          type="text"
+          placeholder="Vault Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-purple-500"
+        />
+        <input
+          type="text"
+          placeholder="Symbol"
+          value={symbol}
+          onChange={(e) => setSymbol(e.target.value)}
+          className="w-full p-3 rounded-md bg-gray-800 text-white focus:ring-2 focus:ring-purple-500"
+        />
+        <button
+          type="submit"
+          className="w-full bg-purple-800 hover:bg-purple-600 text-white py-2 rounded-md transition"
+        >
+          Create Vault
+        </button>
+      </form>
+    </div>
   );
 }
